@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+
+
+class Solution{
+    
+    class student
+    {
+        public:
+        int p;
+        int c;
+        int m;
+        
+    };
+    static bool comp(student& s1,student& s2)
+    {
+        
+          if(s1.p!=s2.p)
+        {
+            return s1.p<s2.p;
+        }
+        else if(s1.c!=s2.c)
+        {
+          return s1.c>s2.c;
+            
+        }
+       
+            return s1.m<s2.m;
+        
+    }
+    
+    public:
+    void customSort (int phy[], int chem[], int math[], int N)
+    {
+        
+        vector<student> v;
+        
+        for(int i=0;i<N;i++)
+        {
+            student s;
+            s.p=phy[i];
+            s.c=chem[i];
+            s.m=math[i];
+            v.push_back(s);
+            
+        }
+        
+        
+        sort(v.begin(),v.end(),comp);
+        
+         for(int i=0;i<N;i++)
+        {
+          phy[i]=v[i].p;
+          chem[i]=v[i].c;
+          math[i]=v[i].m;
+            
+        }
+        
+        
+        
+       
+    } 
+};
+
+// { Driver Code Starts.
+
+int main () 
+{
+    int t; cin >> t;
+	while (t--)
+	{
+		int n; cin >> n;
+		int phy[n];
+		int chem[n];
+		int math[n];
+		for (int i = 0; i < n; ++i)
+			cin >> phy[i] >> chem[i] >> math[i];
+        Solution ob;
+		ob.customSort (phy, chem, math, n);
+		for (int i = 0; i < n; ++i)
+			cout << phy[i] << " " << chem[i] << " " << math[i] << endl; 
+	}
+}
+
+// Contributed By: Pranay Bansal
+  // } Driver Code Ends

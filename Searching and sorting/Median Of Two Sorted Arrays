@@ -1,0 +1,66 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        
+        
+        
+        int n1=nums1.size();
+        int n2=nums2.size();
+        
+        if(n1>n2)
+        {
+            return findMedianSortedArrays(nums2,nums1);
+        }
+        
+        
+        int l=0;
+        int r=n1;
+        
+        while(l<=r)
+        {
+            
+            int partx=(l+r)/2;
+            int party=(n1+n2+1)/2-partx;
+            
+            int rightmina=partx==0?INT_MIN:nums1[partx-1];
+            int leftmaxa=partx==n1?INT_MAX:nums1[partx];
+            
+             int rightminb=party==0?INT_MIN:nums2[party-1];
+            int leftmaxb=party==n2?INT_MAX:nums2[party];
+            
+            if(rightmina<=leftmaxb && rightminb<=leftmaxa)
+            {
+                double ans=0;
+                
+                if((n1+n2)%2==0)
+                {
+                   
+                    ans=max(rightmina,rightminb)+min(leftmaxa,leftmaxb);
+                    ans/=2.0;
+                    return ans;
+                }
+                else
+                {
+                    ans=max(rightmina,rightminb);
+                    return ans;
+                    
+                }
+                
+                
+            }
+            
+            if(rightmina>leftmaxb)
+            {
+                r=partx-1;
+            }
+            else
+            {
+                l=partx+1;
+            }
+            
+        }
+        return (double)0;
+        
+        
+    }
+};

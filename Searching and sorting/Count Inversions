@@ -1,0 +1,74 @@
+    long long int ans=0;
+vector<long long> mergearr(vector<long long>& left,vector<long long>& right)
+{
+    long long n1=left.size();
+    long long n2=right.size();
+    vector<long long> merge(n1+n2);
+    
+    long long k=0;
+    
+    long long p1=0;
+    long long p2=0;
+    while(p1<n1 && p2<n2)
+    {
+        if(left[p1]<=right[p2])
+        {
+            merge[k]=left[p1];
+            k++;
+            p1++;
+        }
+        else
+        {
+            ans+=n1-p1;
+              merge[k]=right[p2];
+              p2++;
+              k++;
+            
+        }
+        
+    }
+    
+    while(p1<n1)
+    {
+        merge[k]=left[p1];
+            k++;
+            p1++;
+    }
+    
+       while(p2<n2)
+    {
+        merge[k]=right[p2];
+            k++;
+            p2++;
+    }
+    
+    return merge;
+    
+    
+}
+
+vector<long long> msort(long long arr[],long long l,long long h)
+{
+    if(l==h)
+    {
+        vector<long long> a={arr[l]};
+        return a;
+    }
+    
+    long long mid=(l+h)/2;
+    vector<long long> left=msort(arr,l,mid);
+    vector<long long> right=msort(arr,mid+1,h);
+    vector<long long> merge=mergearr(left,right);
+    return merge;
+    
+    
+}
+
+
+long long int inversionCount(long long arr[], long long N)
+{
+    // Your Code Here
+    msort(arr,0,N-1);
+    return ans;
+}
+  

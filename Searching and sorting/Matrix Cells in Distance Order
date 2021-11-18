@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<vector<int>> allCellsDistOrder(int rows, int cols, int rCenter, int cCenter) {
+        int dx[4] = {0,0,-1,1};
+        int dy[4] = {1,-1,0,0};
+         vector<vector<int>> ans;
+        queue<pair<int,int>> q;
+        q.push({rCenter,cCenter});
+        set<pair<int,int>> st;
+        st.insert({rCenter,cCenter});
+        
+        while(!q.empty())
+        {
+            
+            int l=q.size();
+            
+           //cout<<l<<endl;
+            while(l--)
+            {
+              int r=q.front().first;
+                int c=q.front().second;
+                q.pop();
+                
+                if(r>=rows || c>=cols || r<0 || c<0)
+                {
+                    continue;
+                }
+                ans.push_back({r,c});
+                 for(int i=0;i<4;i++){
+                int x = r + dx[i];
+                int y = c + dy[i];
+                if(x>=0 && y>=0 && x<rows && y<cols && st.find({x,y}) == st.end()) {
+                    q.push({x,y});
+                    st.insert({x,y});
+                }
+            }
+                
+              
+
+               
+                
+            }
+            
+        }
+        
+        return ans;
+    }
+};

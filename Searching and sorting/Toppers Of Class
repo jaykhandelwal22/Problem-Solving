@@ -1,0 +1,20 @@
+static bool comp(node& a1,node& a2)
+{
+    if(a1.marks>a2.marks)
+    {
+        return true;
+    }
+    else if(a1.marks==a2.marks)
+    {
+        return a1.index<a2.index;
+    }
+    return false;
+    
+}
+void kTop(node a[],int n)
+{
+    // Your code goes here
+    sort(a,a+n,comp);
+    
+    
+}

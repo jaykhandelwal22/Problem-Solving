@@ -1,0 +1,70 @@
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        
+        int n=nums.size();
+        int fposin=-1;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]>=0)
+            {
+                fposin=i;
+                break;
+            }
+        }
+        int l,r;
+        if(fposin==-1)
+        {
+            l=n-1;
+            r=n;
+        }
+        else
+        {
+            l=fposin-1;
+            r=fposin;
+        }
+        
+     
+        vector<int> ans(n,0);
+        int i=0;
+        while(l>=0 && r<n)
+        {
+            int t=abs(nums[l]);
+            if(t<nums[r])
+            {
+                ans[i]=t;
+                l--;
+            }
+            else
+            {
+                ans[i]=nums[r];
+                r++;
+            }
+            i++;
+            
+        }
+        
+        while(l>=0)
+        {
+             int t=abs(nums[l]);
+            l--;
+            ans[i]=t;
+           i++;
+        }
+          while(r<n)
+        {
+             int t=abs(nums[r]);
+          
+            ans[i]=t;
+                r++;
+           i++;
+        }
+         for(int i=0;i<n;i++)
+        {
+           ans[i]=ans[i]*ans[i];
+        }
+         return ans;
+        
+    }
+};

@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int nextGreaterElement(int n) {
+        
+        if(n<=11)
+        {
+            return -1;
+        }
+        
+        string s=to_string(n);
+        
+        int j=s.length()-1;
+        while(j>0 && s[j-1]>=s[j])
+        {
+            j--;
+        }
+        
+        if(j==0)
+        {
+            return -1;
+        }
+        
+        int p=j-1;
+        
+        j=s.length()-1;
+        int swap=-1;
+        while(j>p)
+        {
+            if(s[j]>s[p])
+            {
+                  swap=j;
+            break;
+            }
+          j--;
+        }
+        char c1=s[p];
+        s[p]=s[swap];
+        s[swap]=c1;
+        //swap(s[p],s[swap]);
+        reverse(s.begin()+p+1,s.end());
+         long next = stol(s);
+        return next == n || next > INT_MAX ? -1 : next;
+        
+        
+        
+    }
+};

@@ -1,0 +1,80 @@
+// m1
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+        
+        vector<int> ans;
+        unordered_map<char,int> um;
+        for(auto x : s)
+        {
+            um[x]++;
+        }
+         unordered_map<char,int> um1;
+         for(int i=0;i<s.length();i++)
+         {
+             char ch=s[i];
+             um1[s[i]]++;
+             int f=1;
+             int c=0;
+             for(auto x : um1)
+             {
+                 c+=x.second;
+                 if(x.second!=um[x.first])
+                 {
+                    // cout<<x.first<<" "<<x.second<<" ";
+                     f=0;
+                     break;
+                 }
+             }
+             
+             if(f==1)
+             {
+                 ans.push_back(c);
+                 um1.clear();
+             }
+             
+             
+         }
+        return ans;
+        
+    }
+};
+
+
+//m2
+
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+        
+        
+        vector<int> ans;
+        
+        vector<int> freq(26,-1);
+        
+        int n=s.length();
+         for(int i=n-1;i>=0;i--)
+         {
+             if(freq[s[i]-'a']==-1)
+             {
+                 freq[s[i]-'a']=i;
+             }
+         }
+        int t1=INT_MIN;
+        int len=0;
+        for(int i=0;i<n;i++)
+        {
+            int lp=freq[s[i]-'a'];
+            t1=max(t1,lp);
+            len++;
+            if(t1==i)
+            {
+                ans.push_back(len);
+                t1=INT_MIN;
+                len=0;
+            }
+            
+        }
+        return ans;
+    }
+};

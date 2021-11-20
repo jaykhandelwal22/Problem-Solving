@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int partitionDisjoint(vector<int>& nums) {
+        int n=nums.size();
+        int ans=0;
+        int gr=nums[0];
+        int lm=nums[0];
+        for(int i=1;i<n;i++)
+        {
+            if(nums[i]>gr)
+            {
+                gr=nums[i];
+            }
+            else if(nums[i]<lm)
+            {
+                lm=gr;
+                ans=i;
+            }
+        }
+        return ans+1;
+    }
+};

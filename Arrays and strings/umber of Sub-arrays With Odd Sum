@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int numOfSubarrays(vector<int>& arr) {
+        int n=arr.size();
+        vector<int> pre(n);
+        pre[0]=arr[0];
+        int mod=(int)1e9+7;;
+        for(int i=1;i<n;i++)
+        {
+            pre[i]=arr[i]+pre[i-1];
+        }
+        
+        int ans=0;
+        
+        int co=0;
+        int ce=0;
+         for(int i=0;i<n;i++)
+        {
+           int el=pre[i];
+             if(el%2!=0)
+             {
+                 ans=(ans%mod+(ce+1)%mod)%mod;
+                 co++;
+             }
+             else
+             {
+                 ce++;
+                   ans=(ans%mod+(co)%mod)%mod;
+                
+             }
+             
+        }
+        
+        return ans%mod;
+    }
+};

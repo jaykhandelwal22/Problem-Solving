@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
+        
+        vector<vector<int>> ans;
+        
+        int p1=0;
+        int p2=0;
+        int n1=firstList.size();
+        int n2=secondList.size();
+        while(p1<n1 && p2<n2)
+        {
+            int s1=firstList[p1][0];
+            int e1=firstList[p1][1];
+            
+               int s2=secondList[p2][0];
+            int e2=secondList[p2][1];
+            
+            int csp=max(s1,s2);
+            int cep=min(e1,e2);
+            if(cep>=csp)
+            {
+                ans.push_back({csp,cep});
+            }
+            if(e1<e2)
+            {
+                p1++;
+            }
+            else
+            {
+                p2++;
+            }
+          
+        
+            
+        }
+        
+        return ans;
+    }
+};

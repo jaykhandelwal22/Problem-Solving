@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int waysToMakeFair(vector<int>& nums) {
+        
+        int n=nums.size();
+        int es=0;
+        int os=0;
+        vector<int> sos(n+1,0);
+        vector<int> ses(n+1,0);
+        for(int i=n-1;i>=0;i--)
+        {
+            if(i%2==0)
+            {
+                es+=nums[i];
+            }
+            else
+            {
+                os+=nums[i];
+            }
+            sos[i]=os;
+            ses[i]=es;
+        }
+        
+        int ce=0;
+        int co=0;
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            int te=sos[i+1];
+            int to=ses[i+1];
+            if(te+ce==co+to)
+            {
+                ans++;
+            }
+            if(i%2==0)
+            {
+                ce+=nums[i];
+            }
+            else
+            {
+                co+=nums[i];
+            }
+            
+        }
+        return ans;
+    }
+};

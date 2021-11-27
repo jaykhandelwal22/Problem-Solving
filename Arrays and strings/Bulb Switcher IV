@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minFlips(string target) {
+     
+        int n=target.length();
+        char st='0';
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            if(target[i]!=st)
+            {
+                st=target[i];
+                ans++;
+            }
+            
+        }
+        return ans;
+    }
+};

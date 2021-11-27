@@ -1,0 +1,57 @@
+class Solution {
+    
+    char f(vector<int>& freq,char p)
+    {
+        int ans=INT_MIN;
+        char c;
+        for(int i=0;i<26;i++)
+        {
+           if(freq[i]>0)
+           {
+               char ch='a'+i;
+               if((ans<freq[i] && (ch!=p || p=='*')))
+               {
+                   ans=freq[i];
+                   c=ch;
+               }
+               
+           }
+            
+        }
+        
+        return c;
+    }
+public:
+    string reorganizeString(string s) {
+        
+        int n=s.length();
+        vector<int> freq(26,0);
+        for(int i=0;i<n;i++)
+        {
+            freq[s[i]-'a']++;
+            
+        }
+        
+        int i=0;
+        char p='*';
+        string ans;
+        while(i<n)
+        {
+            char c=f(freq,p);
+           // cout<<c<<endl;
+            ans+=c;
+            p=c;
+            freq[c-'a']--;
+            i++;
+        }
+        
+        for(int i=0;i<n-1;i++)
+        {
+            if(ans[i]==ans[i+1])
+            {
+                return "";
+            }
+        }
+        return ans;
+    }
+};

@@ -1,0 +1,40 @@
+class Solution {
+    
+    void solve(vector<string>& ans,int k,int n,string& curr)
+    {
+        
+        if(curr.length()==n)
+        {
+            ans.push_back(curr);
+            return;
+        }
+        
+        for(char c='a';c<='c';c++)
+        {
+           if(curr.length()==0 || curr.back()!=c)
+           {
+               curr.push_back(c);
+               solve(ans,k,n,curr);
+               curr.pop_back();
+           }
+            
+        }
+        
+        
+    }
+    
+public:
+    string getHappyString(int n, int k) {
+        
+        int pos=pow(2,n-1);
+        pos*=3;
+        if(k>pos)
+        {
+            return "";
+        }
+        string temp;
+        vector<string> res;
+        solve(res,k,n,temp);
+        return res[k-1];
+    }
+};
